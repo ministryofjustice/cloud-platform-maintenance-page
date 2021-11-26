@@ -6,11 +6,11 @@ This directory contains the manifest files needed to deploy a standard maintenan
 This directory also contains the maintenance page HTML file, along with a DockerFile to compile an image.
 
 ## Deploying the page
-Within the `kubectl_deploy` directory, there are 2 simple manifest files that make up the deployment, `deploy.yaml` and `service.yaml`.
+Within the `kubect_deploy` directory, there are 2 simple manifest files that make up the deployment, `deploy.yaml` and `service.yaml`.
 
 From the root of this repository, simply run: 
 ```
-kubectl apply -f kubectl_deploy -n YOUR-NAMESPACE
+kubectl apply -f kubect_deploy -n YOUR-NAMESPACE
 ```
 The deployment will create a pod called `maintenance-page-*` and a service named `maintenance-page-svc`.
 
@@ -38,5 +38,5 @@ Once the maintenance page is not needed anymore :
  - Make sure the your app can be reached via the URL, as expected.
  - The maintenance page can be removed by running: 
     ```
-    kubectl delete -f kubectl_deploy -n YOUR-NAMESPACE
+    kubectl delete -f kubect_deploy -n YOUR-NAMESPACE
     ```
