@@ -1,19 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: maintenance-page
+    name: maintenance-page
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app:  maintenance-page
-  template:
-    metadata:
-      labels:
-        app: maintenance-page
-    spec:
-      containers:
-      - name: cica-maintenance-page
-        image: "754256621582.dkr.ecr.eu-west-2.amazonaws.com/cica/cica-maintenance-page:latest"
-        ports:
-        - containerPort: 8080
+    replicas: 4
+    selector:
+        matchLabels:
+            app: maintenance-page
+    template:
+        metadata:
+            labels:
+                app: maintenance-page
+        spec:
+            containers:
+                - name: cica-maintenance-page
+                  image: "754256621582.dkr.ecr.eu-west-2.amazonaws.com/cica/cica-maintenance-page:latest"
+                  ports:
+                      - containerPort: 8080
+                  volumeMounts:
+                      - name: maintenance-config
+                        mountPath: "/app/index.html"
+                        subPath: "index.html"
+                        readOnly: true
+                  securityContext:
+                      allowPrivilegeEscalation: false
+                      runAsNonRoot: true
+                      seccompProfile:
+                          type: RuntimeDefault
+                      capabilities:
+                          drop: ["ALL"]
+            volumes:
+                - name: maintenance-config
+                  configMap:
+                      name: maintenance-config
+                      items:
+                          - key: "index.html"
+                            path: "index.html"
