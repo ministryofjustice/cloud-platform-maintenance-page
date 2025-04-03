@@ -101,7 +101,7 @@ jobs:
                   command: |
                       echo "deploy before aws ecr"
                       kubectl create configmap maintenance-config --from-file=index.html -o yaml --dry-run=client | kubectl replace --force -f -
-                      kubectl set image -f kube_deploy/maintenance-deploy.yaml cica-maintenance-page=${ECR_REGISTRY}/${ECR_REPOSITORY}:${CIRCLE_SHA1} --local -o yaml \
+                      kubectl set image -f kube_deploy/Dev/maintenance-deploy.yaml cica-maintenance-page=${ECR_REGISTRY}/${ECR_REPOSITORY}:${CIRCLE_SHA1} --local -o yaml \
                       | kubectl apply -f -
                       kubectl apply \
                           -f kube_deploy/Dev/maintenance-service.yaml \
