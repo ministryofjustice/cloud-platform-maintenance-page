@@ -33,6 +33,6 @@ jobs:
           load: true
           tags: ministryofjustice/cloud-platform-maintenance-page:test
 
-      - run: |
-          docker image ls
+      - name: Test image
+        run: |
           docker run --rm --entrypoint=/bin/sh ministryofjustice/cloud-platform-maintenance-page:test -c "cat /opt/bitnami/nginx/html/index.html && ls -lash /opt/bitnami/nginx/conf/server_blocks/"
