@@ -31,8 +31,8 @@ jobs:
           context: .
           push: false
           load: true
-          tags: latest
+          tags: ministryofjustice/cloud-platform-maintenance-page:test
 
       - run: |
           docker image ls
-          docker run --rm --entrypoint=/bin/sh ministryofjustice/cloud-platform-maintenance-page:latest -c "cat /opt/bitnami/nginx/html/index.html && ls -lash /opt/bitnami/nginx/conf/server_blocks/"
+          docker run --rm --entrypoint=/bin/sh ministryofjustice/cloud-platform-maintenance-page:test -c "cat /opt/bitnami/nginx/html/index.html && ls -lash /opt/bitnami/nginx/conf/server_blocks/"
